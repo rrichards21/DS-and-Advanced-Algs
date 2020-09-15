@@ -4,13 +4,13 @@
 using namespace std;
 
 int main(){
-	
+
   int n;
   cout<<"Ingrese la cantidad de números"<<endl;
   cin>>n;
   Busqueda b(n);
 
-  
+
   int num,pos;
   double time;
   cout<<"Ingrese número a buscar"<<endl;
@@ -24,14 +24,14 @@ int main(){
   printf("Lineal: %d\n%.10f\n\n",pos, time/(double)rep);
 
   start = clock();
-  for(int i=0;i<rep;i++)  pos = b.binariaRecursiva(num,0,n-1);
+  for(int i=0;i<rep;i++)  pos = b.binaria(num);
   time = ((double)clock() - start) / CLOCKS_PER_SEC;
-  printf("Binaria recursiva: %d\n%.10f\n\n",pos, time/(double)rep);
-  
+  printf("Binaria: %d\n%.10f\n\n",pos, time/(double)rep);
+
   start = clock();
-  for(int i=0;i<rep;i++)  pos = b.binariaIterativa(num);
+  for(int i=0;i<rep;i++)  pos = b.doblada(num);
   time = ((double)clock() - start) / CLOCKS_PER_SEC;
-  printf("Binaria iterativa %d\n%.10f\n\n",pos, time/(double)rep);
+  printf("Doblada %d\n%.10f\n\n",pos, time/(double)rep);
     
   return 0;
 }

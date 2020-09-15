@@ -9,14 +9,14 @@ Busqueda::Busqueda(int n) {
   srand(time(NULL));
 
   for(int i=0;i<n;i++) {
-    this->vec[i] = rand() % n + 1;
+    this->vec[i] = i;
   }
   this->tam = n;
-  sort(this->vec,this->vec + this->tam);
+  //sort(this->vec,this->vec + this->tam);
   
   
-  for(int i=0;i<this->tam;i++) cout<<this->vec[i]<<" ";
-  puts("");
+  //for(int i=0;i<this->tam;i++) cout<<this->vec[i]<<" ";
+  //puts("");
 
 }
 
@@ -34,21 +34,32 @@ int Busqueda::lineal(int num){
   return -1;
 }
 
-int Busqueda::binariaRecursiva(int num,int l,int r){
-  int m=(l+r)/2;
-  if(this->vec[m]==num) return m;
-  else if(this->vec[m]!=num && r<=l) return -1; //cuando el numero no está
-  else if(this->vec[m]>num) return binariaRecursiva(num,l,m-1);
-  else return binariaRecursiva(num,m+1,r);
-}
 
-int Busqueda::binariaIterativa(int num){
+int Busqueda::binaria(int num){
   int l=0;
   int r=this->tam-1;
   while(l<=r){
     int m=(l+r)/2;
     if(this->vec[m]==num) return m;
     if(this->vec[m]>num) r=m-1;
+    if(this->vec[m]<num) l=m+1;
+  }
+  return -1;
+
+}
+
+int Busqueda::doblada(int num){
+  if(this->vec[0] == num) return 0;
+  int lim = 1;
+  while(lim < this->tam-1 && this->vec[lim] <= num){
+    lim *= 2;
+  }
+  int l=lim/2;
+  lim = min(lim,this->tam-1);
+  while(l<=lim){
+    int m=(l+lim)/2;
+    if(this->vec[m]==num) return m;
+    if(this->vec[m]>num) lim=m-1;
     if(this->vec[m]<num) l=m+1;
   }
   return -1;
