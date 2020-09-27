@@ -7,7 +7,7 @@ class suffixArray {
   char *_text;
   int *_arr;
  public:
-  suffixArray(const string &text);
+  suffixArray(string &text);
   ~suffixArray();
   int search(const string &pattern)const;
   int patternMatching(const string &pattern)const;
