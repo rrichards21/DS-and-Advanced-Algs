@@ -3,32 +3,15 @@
 
 using namespace std;
 
-bool comp(int i, int j){
-  return i>j;
-}
 
-suffixArray::suffixArray(const string &text) {
-  cout<<"pasando"<<endl;  
+suffixArray::suffixArray(string &text) {
   _text = new char[text.size()+1];
-  cout<<"aqui muere"<<endl;
   strcpy(_text,text.c_str());
   _arr = new int[text.size()+1];
   for(int i = 0; i <= text.size(); i++){
     _arr[i] = i;
   }
   sort(_arr,_arr+text.size()+1,[this](const int i, const int j){return strcmp(this->_text+i,this->_text+j) <= 0 ? true : false;});
-  // for(int i = 0; i <= text.size(); i++){
-  //   cout<<_text+i<<" ";
-  // }
-  // cout<<endl;
-  // for(int i = 0; i <= text.size(); i++){
-  //   cout<<_arr[i]<<" ";
-  // }
-  // cout<<endl;
-  // for(int i = 0; i <= text.size(); i++){
-  //   cout<<_text+_arr[i]<<" ";
-  // }
-  // cout<<endl;
 }
 
 suffixArray::~suffixArray(){
@@ -38,23 +21,44 @@ suffixArray::~suffixArray(){
 
 
 int suffixArray::search(const string &pattern)const{
+  int n = (int)strlen(pattern.c_str());
   int l = 0;
   int r = strlen(_text);
-  while (l<=r)
+  int m;
+  pair<int,int> lim;
+  while (l<r)
   {
-    int m = (l+r)/2;
-    if(strcmp(_text+_arr[m],pattern.c_str()) == 0) return _arr[m];
-    if(strcmp(_text+_arr[m],pattern.c_str()) > 0) r = m-1;
-    else if(strcmp(_text+_arr[m],pattern.c_str()) < 0) l = m+1;
+    m = (l+r)/2;
+    int comp = strncmp(_text+_arr[m],pattern.c_str(),n);
+    if(comp >= 0) r = m;
+    else l = m+1;
   }
-  return -1;
-  
+  if(strncmp(_text+_arr[l],pattern.c_str(),n) != 0) return -1;
+  lim.first = l;
+  r = strlen(_text);
+  while(l<r){
+  	m = (l+r)/2;
+    int comp = strncmp(_text+_arr[m],pattern.c_str(),n);
+    if(comp > 0) r = m;
+    else l = m+1;
+  }
+  if(strncmp(_text+_arr[r],pattern.c_str(),n) != 0) r--;
+  lim.second = r;
+  return lim.second-lim.first+1;
 }
 
 int suffixArray::patternMatching(const string &pattern)const{
+  int j;
+  int ocurrencias = 0;
+  int n = (int)strlen(pattern.c_str());
   for(int i = 0; i < strlen(_text); i++){
-    for(int j = 0; j < pattern.size(); j++){
-
+    for(j = 0; j < pattern.size(); j++){
+    	//cout<<i<<".- compare: "<<_text[i+j]<<","<<pattern[j]<<endl;;
+      if(_text[i+j] != pattern[j]) break;
+    }
+    if(j == pattern.size()){
+      ocurrencias++;
     }
   }
+  return ocurrencias;
 }
