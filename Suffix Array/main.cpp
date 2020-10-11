@@ -51,8 +51,8 @@ int main(){
 	ifstream input;
 	input.open("input",ios_base::in);
 
-	// ofstream out;
-	// out.open("creciente.txt",ios_base::out);
+	ofstream out;
+	out.open("creciente.txt",ios_base::out);
 
 	string patron;
 
@@ -62,20 +62,20 @@ int main(){
 
 		inp = generarInput(input);
 
-		// sa = new suffixArray(inp[0]);
-		// out<<inp[0].size()<<" ";
-		// cout<<inp[0].size()<<endl;
-		// start = clock();
-		// for(int i=0;i<rep;i++)  ocurrences = sa->search(inp[1]);
-		// time = ((double)clock() - start) / CLOCKS_PER_SEC;
-		// out<<(time*1000)/(double)rep<<" ";
+		sa = new suffixArray(inp[0]);
+		out<<inp[0].size()<<" ";
+		cout<<inp[0].size()<<endl;
+		start = clock();
+		for(int i=0;i<rep;i++)  ocurrences = sa->search(inp[1]);
+		time = ((double)clock() - start) / CLOCKS_PER_SEC;
+		out<<(time*1000)/(double)rep<<" ";
 
-		// start = clock();
-		// for(int i=0;i<rep;i++)  ocurrences = sa->patternMatching(inp[1]);
-		// time = ((double)clock() - start) / CLOCKS_PER_SEC;
-		// out<<(time*1000)/(double)rep<<endl;
+		start = clock();
+		for(int i=0;i<rep;i++)  ocurrences = sa->patternMatching(inp[1]);
+		time = ((double)clock() - start) / CLOCKS_PER_SEC;
+		out<<(time*1000)/(double)rep<<endl;
 
-		// sa->~suffixArray();
+		sa->~suffixArray();
 	}
 
 	//n fijo y patrones aleatorios
