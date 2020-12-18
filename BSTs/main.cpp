@@ -36,7 +36,10 @@ int main(){
       avl->insert(*i);
     }
     clock_t end = clock();
-    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    begin = clock();
+    for(int i = 0; i < 10000; i++) avl->search(random()%v.size() + 1);
+    end = clock();
+    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC*10000;
     out<<time_spent<<" ";
 
     begin = clock();
@@ -44,8 +47,10 @@ int main(){
       rbt->insert(*i);
     }
     end = clock();
-
-    time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    begin = clock();
+    for(int i = 0; i < 10000; i++) rbt->search(random()%v.size() + 1);
+    end = clock();
+    time_spent = (double)(end - begin) / CLOCKS_PER_SEC*10000;
     out<<time_spent<<endl;
     n *= 10;
     v.resize(0);
