@@ -4,7 +4,6 @@ using namespace std;
 
 
 huffmanC::huffmanC(ifstream &text, ofstream &out){
-    cout<<"Huffman con char"<<endl;
     string line;
     float original = 0;
     while(getline(text,line)){
@@ -38,11 +37,10 @@ huffmanC::huffmanC(ifstream &text, ofstream &out){
     for(auto it = huffmanCode.begin(); it != huffmanCode.end(); it++){
         sum += it->second.size() * freqs[it->first];
     }
-    out<<(sum/original)*100<<" "<<nodos<<endl;
+    out<<(sum/original)*100<<" & "<<nodos<<endl;
 }
 
 huffmanC::~huffmanC(){
-    
 }
 
 huffmanC::Node* huffmanC::setNode(char ch, int freq, Node* left, Node* right){
