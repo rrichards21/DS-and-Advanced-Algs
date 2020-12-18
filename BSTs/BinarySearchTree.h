@@ -1,6 +1,5 @@
 #include "BinarySearchTreeADT.h"
 
-
 class BinarySearchTree: public BinarySearchTreeADT{
  private:
   node *_root=NULL;

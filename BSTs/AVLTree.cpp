@@ -90,7 +90,8 @@ node* AVLTree::checkRotations(node *n, int val){
     {  
 		//cout<<"LRR: "<<n->num<<" "<<n->height<<endl;
         n->left = leftRotate(n->left);
-		return rightRotate(n); 
+		node *aux = rightRotate(n);
+		return aux; 
     }
 
     if (balance < -1 && val < n->right->num)  
@@ -105,8 +106,11 @@ node* AVLTree::checkRotations(node *n, int val){
 
 node* AVLTree::rightRotate(node *n){
     node *x = n->left;
-    n->left = x->right;  
-    x->right = n;
+    node *T2 = x->right;
+
+	if(n->left == NULL) return x;
+	x->right = n;
+	n->left = T2;
 	if(n->parent == NULL){
 		x->parent = n->parent;
 		n->parent = x;
@@ -128,8 +132,10 @@ node* AVLTree::rightRotate(node *n){
 
 node* AVLTree::leftRotate(node *n){
 	node *y = n->right;
-	n->right = y->left;
+	node *T2 = y->left;
+	if(n->right == NULL) return y;
 	y->left = n;
+	n->right = T2;
 	if(n->parent == NULL){
 		y->parent = n->parent;
 		n->parent = y;

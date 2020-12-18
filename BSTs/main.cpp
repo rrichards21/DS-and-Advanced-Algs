@@ -1,13 +1,14 @@
 #include <bits/stdc++.h>
 #include "BinarySearchTree.h"
 #include "AVLTree.h"
+#include "RedBlackTree.h"
 
 using namespace std;
 
 int main(){
   BinarySearchTreeADT *bst = new BinarySearchTree();
   BinarySearchTreeADT *avl = new AVLTree();
-  //BinarySearchTreeADT *rbt = new RedBlackTree();
+  BinarySearchTreeADT *rbt = new RedBlackTree();
   int n;
   cin>>n;
   vector<int> v;
@@ -16,19 +17,19 @@ int main(){
   out.open("output.txt",ios_base::out);
   int j = 1;
   for(int i = 1; i <= n; ++i) v.push_back(i);
-  random_shuffle(v.begin(),v.end());
+  //random_shuffle(v.begin(),v.end());
+  for(int i = 0; i < v.size(); ++i) cout<<v[i]<<" ";
   for(vector<int>::iterator i = v.begin(); i != v.end(); ++i){
-    avl->insert(*i);
-    cout<<*i<<" "<<j++<<endl;
+      avl->insert(*i);
   }
-
-  /*
-  while(n <= 100000000){
+  cout<<endl;
+  avl->inorder(avl->getRoot());
+  while(n < 100000000){
     cout<<n<<endl;
-    out<<j<<" ";
+    out<<n<<" ";
     j++;
     for(int i = 1; i <= n; ++i) v.push_back(i);
-    random_shuffle(v.begin(),v.end());
+    //random_shuffle(v.begin(),v.end());
 
     begin = clock();
     for(vector<int>::iterator i = v.begin(); i != v.end(); ++i){
@@ -37,22 +38,18 @@ int main(){
     clock_t end = clock();
     double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
     out<<time_spent<<" ";
-    /*
-    beging = clock();
+
+    begin = clock();
     for(vector<int>::iterator i = v.begin(); i != v.end(); ++i){
       rbt->insert(*i);
     }
-    clock_t end = clock();
-    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    end = clock();
+
+    time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
     out<<time_spent<<endl;
-    v.resize(0);
-    out<<endl;
     n *= 10;
+    v.resize(0);
   }
-  */
-
-
-  cout<<"jaksd"<<endl;
-  //avl->inorder(avl->getRoot());
+  cout<<"ajsd"<<endl;
   return 0;
 }

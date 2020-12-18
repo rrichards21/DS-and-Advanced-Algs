@@ -1,12 +1,12 @@
 #ifndef BST_H
 #define BST_H
-
 struct node{
   int num;
   int height;
   node* parent;
   node *left;
   node *right;
+  bool isRed;
 };
 class BinarySearchTreeADT {
 
