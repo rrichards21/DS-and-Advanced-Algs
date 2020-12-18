@@ -69,3 +69,7 @@ void BinarySearchTree::inorder(node *n){
 	inorder(n->right);
 	free(n);
 }
+
+node* BinarySearchTree::getRoot(){
+	return _root;
+}

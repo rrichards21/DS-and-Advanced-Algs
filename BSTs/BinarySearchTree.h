@@ -13,4 +13,5 @@ class BinarySearchTree: public BinarySearchTreeADT{
   node *search(int);
   int size();
   void inorder(node *n);
+  node* getRoot();
 };
